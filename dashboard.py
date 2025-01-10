@@ -1,7 +1,7 @@
 import pandas as pd
-# Charger le fichier CSV
 data = pd.read_csv("data_dashboard_large.csv")
-
-
+print (data.info())
+print (data.describe ())
+print (data.isnull()).sum())
 
 
