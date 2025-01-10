@@ -1,78 +1,48 @@
-import streamlit as st
 import pandas as pd
-import numpy as np 
+# Charger le fichier CSV
+data = pd.read_csv("data_dashboard_large.csv")
+# Conversion des dates
+data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
+pip install streamlit plotly pandas
+import streamlit as st
+import plotly.express as px
+# Titre principal
+st.title("Dashboard Interactif : Performances de la chaîne de magasins")
+# Sidebar pour filtres
+with st.sidebar:
+    st.header("Filtres dynamiques")
+    magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique(), default=data['Magasin'].unique())
+    categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
+    date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
+# Filtrage des données
+filtered_data = data[
+    (data['Magasin'].isin(magasins)) &
+    (data['Categorie_Produit'].isin(categories)) &
+    (data['Date_Transaction'].between(date_range[0], date_range[1]))
+]
+total_sales = filtered_data['Montant'].sum()
+total_transactions = filtered_data.shape[0]
+avg_transaction = filtered_data['Montant'].mean()
+avg_satisfaction = filtered_data['Satisfaction_Client'].mean()
+# Affichage des KPIs
+st.subheader("Vue d'ensemble")
+st.metric("Total des ventes (€)", f"{total_sales:,.2f}")
+st.metric("Nombre total de transactions", total_transactions)
+st.metric("Montant moyen par transaction (€)", f"{avg_transaction:,.2f}")
+st.metric("Satisfaction client moyenne", f"{avg_satisfaction:.2f}")
 
-st.set_page_config(
-    page_title = 'Streamlit Sample Dashboard Template',
-    page_icon = '✅',
-    layout = 'wide'
-)
+daily_sales = filtered_data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+fig_daily_sales = px.line(daily_sales, x='Date_Transaction', y='Montant', title="Ventes quotidiennes")
+st.plotly_chart(fig_daily_sales)
 
-st.markdown("## KPI First Row")
+sales_by_store = filtered_data.groupby('Magasin')['Montant'].sum().reset_index()
+fig_store_sales = px.pie(sales_by_store, names='Magasin', values='Montant', title="Répartition des ventes par magasin")
+st.plotly_chart(fig_store_sales)
 
-# kpi 1 
-
-kpi1, kpi2, kpi3 = st.beta_columns(3)
-
-with kpi1:
-    st.markdown("**First KPI**")
-    number1 = 111 
-    st.markdown(f"<h1 style='text-align: center; color: red;'>{number1}</h1>", unsafe_allow_html=True)
-
-with kpi2:
-    st.markdown("**Second KPI**")
-    number2 = 222 
-    st.markdown(f"<h1 style='text-align: center; color: red;'>{number2}</h1>", unsafe_allow_html=True)
-
-with kpi3:
-    st.markdown("**Third KPI**")
-    number3 = 333 
-    st.markdown(f"<h1 style='text-align: center; color: red;'>{number3}</h1>", unsafe_allow_html=True)
-
-st.markdown("<hr/>",unsafe_allow_html=True)
+store_summary = filtered_data.groupby('Magasin').agg(
+    Ventes_totales=('Montant', 'sum'),
+    Transactions=('ID_Client', 'count')
+).reset_index()
+st.dataframe(store_summary)
 
 
-st.markdown("## KPI Second Row")
-
-# kpi 1 
-
-kpi01, kpi02, kpi03, kpi04, kpi05 = st.beta_columns(5)
-
-with kpi01:
-    st.markdown("**Another 1st KPI**")
-    number1 = 111 
-    st.markdown(f"<h1 style='text-align: center; color: yellow;'>{number1}</h1>", unsafe_allow_html=True)
-
-with kpi02:
-    st.markdown("**Another 1st KPI**")
-    number1 = 222 
-    st.markdown(f"<h1 style='text-align: center; color: yellow;'>{number1}</h1>", unsafe_allow_html=True)
-
-with kpi03:
-    st.markdown("**Another 1st KPI**")
-    number1 = 555 
-    st.markdown(f"<h1 style='text-align: center; color: yellow;'>{number1}</h1>", unsafe_allow_html=True)
-
-with kpi04:
-    st.markdown("**Another 1st KPI**")
-    number1 = 333 
-    st.markdown(f"<h1 style='text-align: center; color: yellow;'>{number1}</h1>", unsafe_allow_html=True)
-
-with kpi05:
-    st.markdown("**Another 1st KPI**")
-    number1 = 444 
-    st.markdown(f"<h1 style='text-align: center; color: yellow;'>{number1}</h1>", unsafe_allow_html=True)
-
-st.markdown("<hr/>",unsafe_allow_html=True)
-
-st.markdown("## Chart Layout")
-
-chart1, chart2 = st.beta_columns(2)
-
-with chart1:
-    chart_data = pd.DataFrame(np.random.randn(20, 3),columns=['a', 'b', 'c'])
-    st.line_chart(chart_data)
-
-with chart2:
-    chart_data = pd.DataFrame(np.random.randn(2000, 3),columns=['a', 'b', 'c'])
-    st.line_chart(chart_data)
