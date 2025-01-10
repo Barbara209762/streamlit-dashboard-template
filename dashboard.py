@@ -3,7 +3,7 @@ import pandas as pd
 data = pd.read_csv("data_dashboard_large.csv")
 # Conversion des dates
 data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
-pip install streamlit plotly pandas
+
 import streamlit as st
 import plotly.express as px
 # Titre principal
