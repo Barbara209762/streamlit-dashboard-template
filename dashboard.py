@@ -1,6 +1,8 @@
 import pandas as pd
-from google.colab import files
-data = pd.read_csv("data_dashboard_large.csv") 
+import os
+
+   os.chdir("/path/to/your/directory")  
+   data = pd.read_csv("data_dashboard_large.csv")
 
 
 
