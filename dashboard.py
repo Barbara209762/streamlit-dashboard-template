@@ -8,7 +8,6 @@ import plotly.express as px
 st.title("Dashboard Interactif : Performances de la chaîne de magasins")
 
 # Sidebar pour filtres
-with st.sidebar:
 
 magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique(), default=data['Magasin'].unique())
 categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
