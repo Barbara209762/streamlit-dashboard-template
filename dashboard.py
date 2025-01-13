@@ -116,7 +116,7 @@ distribution_satisfaction = data['Satisfaction_Client'].value_counts().reset_ind
 distribution_satisfaction.columns = ['Score', 'Nombre']
 st.dataframe(distribution_satisfaction)
 
-streamlit run ton_script.py
+
 
 
 
