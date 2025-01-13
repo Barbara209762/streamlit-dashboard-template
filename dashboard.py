@@ -22,8 +22,7 @@ data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
 daily_sales = data.groupby("Date_Transaction")["Montant"].sum().reset_index()
 
 # Créer le graphique interactif avec Plotly
-fig = px.line(
-    daily_sales,
+   daily_sales,
     x="Date_Transaction",
     y="Montant",
     title="Ventes quotidiennes",
