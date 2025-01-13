@@ -12,6 +12,15 @@ magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique()
 categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
+# Filtrage des données
+filtered_data = data[
+(data['Magasin'].isin(magasins)) &
+(data['Categorie_Produit'].isin(categories)) &
+(data['Date_Transaction'].between(date_range[0], date_range[1]))
+]
+
+
+
 
 
 
