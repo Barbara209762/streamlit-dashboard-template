@@ -13,13 +13,13 @@ magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique()
 categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
-# Filtrage des données
-# Filter by date, store, and category
-filtered_data = data[
-    (data['Date_Transaction'].between(start_date, end_date)) 
-    (data['Magasin'].isin(magasins)) 
-    (data['Categorie_Produit'].isin(categories))
-]
+1. Calculs des KPIs :
+
+total_sales = filtered_data['Montant'].sum()
+total_transactions = filtered_data.shape[0]
+avg_transaction = filtered_data['Montant'].mean()
+avg_satisfaction = filtered_data['Satisfaction_Client'].mean()
+
 
 
 
