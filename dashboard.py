@@ -7,7 +7,7 @@ import streamlit as st
 st.title("Dashboard Interactif : Performances de la chaîne de magasins")
 
 # Sidebar pour filtres
-total_sales = filtered_data['Montant'].sum()
+total_sales = filtered_data('Montant').sum()
 magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique(), default=data['Magasin'].unique())
 categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
