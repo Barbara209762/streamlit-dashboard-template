@@ -6,8 +6,9 @@ import streamlit as st
 # Titre principal
 st.title("Dashboard Interactif : Performances de la chaîne de magasins")
 
-st.title("1.Histogramme des ventes quotidiennes")
-daily_sales = data.groupby("Date_Transaction")["Montant"].sum().reset_index()
+st.set_page_config(page_title="Dashboard Interactif", layout="wide")
+st.title("Performances des ventes")
+
 
 
 
