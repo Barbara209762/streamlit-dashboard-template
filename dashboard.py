@@ -39,8 +39,8 @@ st.metric("Satisfaction client moyenne (score de 1 à 5)", f"{satisfaction_moyen
 st.subheader('Ventes quotidiennes')
 ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 import pandas as pd
-pip install plotly
-pip show plotly
+#pip install plotly
+#pip show plotly
 import plotly.express as px
 
 # Supposons que ventes_journalières est déjà défini
