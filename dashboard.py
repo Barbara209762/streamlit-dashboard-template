@@ -66,7 +66,8 @@ ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 # Montant moyen par transaction pour chaque magasin (barres)
 st.subheader('Montant moyen par transaction par magasin')
 montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
-fig_montant_moyen_par_magasin = px.bar(montant_moyen_par_magasin, x='Magasin', y='Montant', title='Montant moyen par transaction par magasin') st.plotly_chart(fig_montant_moyen_par_magasin)
+fig_montant_moyen_par_magasin = px.bar(montant_moyen_par_magasin, x='Magasin', y='Montant', title='Montant moyen par transaction par magasin')
+st.plotly_chart(fig_montant_moyen_par_magasin)
 
 # Tableau des ventes totales et nombre de transactions par magasin
 st.subheader('Ventes totales et nombre de transactions par magasin')
