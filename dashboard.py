@@ -38,7 +38,25 @@ st.metric("Satisfaction client moyenne (score de 1 à 5)", f"{satisfaction_moyen
 # Graphique des ventes quotidiennes
 st.subheader('Ventes quotidiennes')
 ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+import pandas as pd
+pip install plotly
+pip show plotly
+import plotly.express as px
+
+# Supposons que ventes_journalières est déjà défini
+# Vérification des types de données
+print(ventes_journalières.dtypes)
+
+# Conversion du format de la date
+ventes_journalières['Date_Transaction'] = pd.to_datetime(ventes_journalières['Date_Transaction'])
+
+# Vérification des valeurs pour s'assurer qu'il n'y a pas de NaN ou de valeurs incohérentes
+print(ventes_journalières.head())
+
+# Génération du graphique
 fig_ventes_journalières = px.line(ventes_journalières, x='Date_Transaction', y='Montant', title='Ventes quotidiennes')
+fig_ventes_journalières.show()
+
 st.plotly_chart(fig_ventes_journalières)
 
 # Analyse par magasin
