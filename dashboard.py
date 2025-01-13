@@ -38,12 +38,7 @@ fig = px.line(df, x="x", y="y", title="My Line Chart")
 fig.show()
 
 daily_sales = filtered_data.groupby('Date_Transaction')['Montant'].sum().reset_index()
-    x=("Date_Transaction"),
-    y=("Montant"),
-    title=("Ventes quotidiennes"),
-    labels={"Date_Transaction": "Date", "Montant": "Montant (€)"),
-    markers=True
-)
+    )
 st.plotly_chart(fig)
 
 
