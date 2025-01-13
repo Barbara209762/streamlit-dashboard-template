@@ -56,7 +56,7 @@ print(ventes_journalières.isnull().sum())
 print(ventes_journalières.head())
 
 # Génération du graphique
-fig_ventes_journalières = px.line(ventes_journalières, x='Date_Transaction', y='Montant', title='Ventes quotidiennes')
+
 fig_ventes_journalières.show()
 
 st.plotly_chart(fig_ventes_journalières)
