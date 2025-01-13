@@ -15,7 +15,6 @@ date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Da
 
 st.header("Graphique des ventes quotidiennes")
 import pandas as pd
-import plotly.express as px
 import streamlit as st
 # Convertir la colonne "Date_Transaction" au format datetime
 data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
