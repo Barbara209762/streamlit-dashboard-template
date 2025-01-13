@@ -72,8 +72,7 @@ ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 # Montant moyen par transaction pour chaque magasin (barres)
 st.subheader('Montant moyen par transaction par magasin')
 montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
-fig_montant_moyen_par_magasin = px.bar(montant_moyen_par_magasin, x='Magasin', y='Montant', title='Montant moyen par transaction par magasin')
-st.plotly_chart(fig_montant_moyen_par_magasin)
+
 
 # Tableau des ventes totales et nombre de transactions par magasin
 st.subheader('Ventes totales et nombre de transactions par magasin')
@@ -87,14 +86,11 @@ st.header('Analyse des catégories de produits')
 # Histogramme des quantités vendues par catégorie
 st.subheader('Quantités vendues par catégorie')
 quantites_par_categorie = data.groupby('Categorie_Produit')['Quantite'].sum().reset_index()
-fig_quantites_par_categorie = px.bar(quantites_par_categorie, x='Categorie_Produit', y='Quantite', title='Quantités vendues par catégorie')
-st.plotly_chart(fig_quantites_par_categorie)
 
 # Graphique empilé des montants des ventes par catégorie et magasin
 st.subheader('Montants des ventes par catégorie et magasin')
 ventes_par_categorie_et_magasin = data.groupby(['Categorie_Produit', 'Magasin'])['Montant'].sum().reset_index()
-fig_ventes_par_categorie_et_magasin = px.bar(ventes_par_categorie_et_magasin, x='Categorie_Produit', y='Montant', color='Magasin', title='Montants des ventes par catégorie et magasin')
-st.plotly_chart(fig_ventes_par_categorie_et_magasin)
+
 
 # Tableau des Top 5 produits les plus vendus par catégorie
 st.subheader('Top 5 des produits les plus vendus par catégorie')
@@ -107,8 +103,6 @@ st.header('Analyse des modes de paiement')
 # Répartition des transactions par mode de paiement (secteurs)
 st.subheader('Répartition des transactions par mode de paiement')
 transactions_par_mode_paiement = data.groupby('Mode_Paiement')['Montant'].sum().reset_index()
-fig_transactions_par_mode_paiement = px.pie(transactions_par_mode_paiement, values='Montant', names='Mode_Paiement', title='Répartition des transactions par mode de paiement')
-st.plotly_chart(fig_transactions_par_mode_paiement)
 
 # Mode de paiement le plus utilisé
 mode_paiement_le_plus_utilise = data['Mode_Paiement'].mode()[0]
@@ -120,13 +114,10 @@ st.header('Analyse de la satisfaction client')
 # Moyenne de satisfaction par magasin et par catégorie (barres)
 st.subheader('Satisfaction client par magasin')
 satisfaction_par_magasin = data.groupby('Magasin')['Satisfaction_Client'].mean().reset_index()
-fig_satisfaction_par_magasin = px.bar(satisfaction_par_magasin, x='Magasin', y='Satisfaction_Client', title='Satisfaction client par magasin')
-st.plotly_chart(fig_satisfaction_par_magasin)
 
 st.subheader('Satisfaction client par catégorie')
 satisfaction_par_categorie = data.groupby('Categorie_Produit')['Satisfaction_Client'].mean().reset_index()
-fig_satisfaction_par_categorie = px.bar(satisfaction_par_categorie, x='Categorie_Produit', y='Satisfaction_Client', title='Satisfaction client par catégorie')
-st.plotly_chart(fig_satisfaction_par_categorie)
+
 
 # Distribution des scores de satisfaction (tableau)
 st.subheader('Distribution des scores de satisfaction')
