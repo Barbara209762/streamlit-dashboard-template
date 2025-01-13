@@ -12,10 +12,6 @@ col1, col2, col3, col4 = st.columns(4)
 
 st.subheader("Histogramme des ventes quotidiennes")
 
-
-
-
-col3.metric("Montant moyen par transaction (€)", f"{avg_transaction_value:,.2f}")
 col4.metric("Satisfaction moyenne", f"{avg_satisfaction:.2f}")
 
 st.subheader("Histogramme des ventes quotidiennes")
