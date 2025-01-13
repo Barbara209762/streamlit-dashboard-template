@@ -67,7 +67,7 @@ st.header('Analyse par magasin')
 st.subheader('Répartition des ventes par magasin')
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 
-st.plotly_chart(fig_ventes_par_magasin)
+
 
 # Montant moyen par transaction pour chaque magasin (barres)
 st.subheader('Montant moyen par transaction par magasin')
