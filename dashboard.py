@@ -14,11 +14,36 @@ categories = st.multiselect("Sélectionnez les catégories de produit", data['Ca
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
 st.header("Graphique des ventes quotidiennes")
-
-filtered_data = data
-print(filtered_data.columns)
-daily_sales = filtered_data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 import pandas as pd
+import plotly.express as px
+import streamlit as st
+# Convertir la colonne "Date_Transaction" au format datetime
+data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
+# Calculer les ventes quotidiennes
+daily_sales = data.groupby("Date_Transaction")["Montant"].sum().reset_index()
+
+# Créer le graphique interactif avec Plotly
+fig = px.line(
+    daily_sales,
+    x="Date_Transaction",
+    y="Montant",
+    title="Ventes quotidiennes",
+    labels={"Date_Transaction": "Date", "Montant": "Montant (€)"},
+    markers=True
+)
+# Calculer les ventes quotidiennes
+daily_sales = data.groupby("Date_Transaction")["Montant"].sum().reset_index()
+
+# Créer le graphique interactif avec Plotly
+fig = px.line(
+    daily_sales,
+    x="Date_Transaction",
+    y="Montant",
+    title="Ventes quotidiennes",
+    labels={"Date_Transaction": "Date", "Montant": "Montant (€)"},
+    markers=True
+)
+st.plotly_chart(fig)
 
 
 
