@@ -13,12 +13,12 @@ magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique()
 categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
-# 1. Calculs des KPIs :
-filtered_data['Montant'] = pd.to_numeric(filtered_data['Montant'])  
-total_sales = filtered_data['Montant'].sum()
-total_transactions = filtered_data.shape[0]
-avg_transaction = filtered_data['Montant'].mean()
-avg_satisfaction = filtered_data['Satisfaction_Client'].mean()
+st.header("Graphique des ventes quotidiennes")
+
+daily_sales = filtered_data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+fig_daily_sales = px.line(daily_sales, x='Date_Transaction', y='Montant', title="Ventes quotidiennes")
+st.plotly_chart(fig_daily_sales)
+
 
 
 
