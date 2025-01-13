@@ -42,7 +42,6 @@ import pandas as pd
 #pip install plotly
 #pip show plotly
 
-
 # Supposons que ventes_journalières est déjà défini
 # Vérification des types de données
 print(ventes_journalières.dtypes)
@@ -57,9 +56,6 @@ print(ventes_journalières.head())
 
 # Génération du graphique
 
-
-
-
 # Analyse par magasin
 st.header('Analyse par magasin')
 
@@ -67,12 +63,10 @@ st.header('Analyse par magasin')
 st.subheader('Répartition des ventes par magasin')
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 
-
-
 # Montant moyen par transaction pour chaque magasin (barres)
 st.subheader('Montant moyen par transaction par magasin')
 montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
-
+fig_montant_moyen_par_magasin = px.bar(montant_moyen_par_magasin, x='Magasin', y='Montant', title='Montant moyen par transaction par magasin') st.plotly_chart(fig_montant_moyen_par_magasin)
 
 # Tableau des ventes totales et nombre de transactions par magasin
 st.subheader('Ventes totales et nombre de transactions par magasin')
