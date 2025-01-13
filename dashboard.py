@@ -10,9 +10,8 @@ col1, col2, col3, col4 = st.columns(4)
 st.header("Vue d'ensemble")
 col1, col2, col3, col4 = st.columns(4)
 
-st.subheader("Histogramme des ventes quotidiennes")
 
-st.subheader("Histogramme des ventes quotidiennes")
+
 
 
 
