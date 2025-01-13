@@ -2,7 +2,7 @@ import pandas as pd
 
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 import streamlit as st
-import plotly.express as px
+
 
 # Titre principal
 st.title("Dashboard Interactif : Performances de la chaîne de magasins")
