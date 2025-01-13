@@ -41,7 +41,7 @@ ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_i
 import pandas as pd
 #pip install plotly
 #pip show plotly
-import plotly.express as px
+
 
 # Supposons que ventes_journalières est déjà défini
 # Vérification des types de données
