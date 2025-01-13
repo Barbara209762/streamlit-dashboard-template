@@ -13,7 +13,7 @@ col1, col2, col3, col4 = st.columns(4)
 st.subheader("Histogramme des ventes quotidiennes")
 
 st.subheader("Histogramme des ventes quotidiennes")
-st.bar_chart(daily_sales, x="Date_Transaction", y="Montant")
+
 
 
 
