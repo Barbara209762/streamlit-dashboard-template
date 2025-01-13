@@ -14,7 +14,7 @@ categories = st.multiselect("Sélectionnez les catégories de produit", data['Ca
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
 # 1. Calculs des KPIs :
-
+filtered_data['Montant'] = pd.to_numeric(filtered_data['Montant'])  
 total_sales = filtered_data['Montant'].sum()
 total_transactions = filtered_data.shape[0]
 avg_transaction = filtered_data['Montant'].mean()
