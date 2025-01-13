@@ -17,7 +17,7 @@ date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Da
 filtered_data = data[
     (data['Magasin'].isin(magasins)) &
     (data['Categorie_Produit'].isin(categories)) &
-   filtered_data = data[data['Date_Transaction'].between(date_range[0], date_range[1])]
+  filtered_data = data[(data['Date_Transaction'].between(start_date, end_date)) & (data['Magasin'].isin(magasins))]
 ]
 
 
