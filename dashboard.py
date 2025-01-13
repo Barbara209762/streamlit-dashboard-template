@@ -57,9 +57,8 @@ print(ventes_journalières.head())
 
 # Génération du graphique
 
-fig_ventes_journalières.show()
 
-st.plotly_chart(fig_ventes_journalières)
+
 
 # Analyse par magasin
 st.header('Analyse par magasin')
