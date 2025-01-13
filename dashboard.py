@@ -19,7 +19,7 @@ filtered_data = data
 print(filtered_data.columns)
 daily_sales = filtered_data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 import pandas as pd
-import plotly.express as px
+
 fig_daily_sales = px.line(daily_sales, x='Date_Transaction', y='Montant', title="Ventes quotidiennes")
 fig_daily_sales.show()
 
