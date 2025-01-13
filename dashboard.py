@@ -38,6 +38,8 @@ st.metric("Satisfaction client moyenne (score de 1 à 5)", f"{satisfaction_moyen
 # Graphique des ventes quotidiennes
 st.subheader('Ventes quotidiennes')
 ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+fig_ventes_journalieres = px.line(ventes_journalieres, x='Date_Transaction', y='Montant', title='Ventes quotidiennes')
+st.plotly_chart(fig_ventes_journalieres)
 import pandas as pd
 #pip install plotly
 #pip show plotly
