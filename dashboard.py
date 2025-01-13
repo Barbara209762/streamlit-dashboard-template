@@ -14,7 +14,7 @@ st.subheader("Histogramme des ventes quotidiennes")
 
 
 
-col2.metric("Nombre total de transactions", total_transactions)
+
 col3.metric("Montant moyen par transaction (€)", f"{avg_transaction_value:,.2f}")
 col4.metric("Satisfaction moyenne", f"{avg_satisfaction:.2f}")
 
