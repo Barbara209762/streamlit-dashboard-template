@@ -22,8 +22,6 @@ import pandas as pd
 
 
 
-st.plotly_chart(fig_daily_sales)
-
 
 
 
