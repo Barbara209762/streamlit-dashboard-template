@@ -49,6 +49,8 @@ print(ventes_journalières.dtypes)
 
 # Conversion du format de la date
 ventes_journalières['Date_Transaction'] = pd.to_datetime(ventes_journalières['Date_Transaction'])
+# Vérifier les valeurs manquantes 
+print(ventes_journalières.isnull().sum())
 
 # Vérification des valeurs pour s'assurer qu'il n'y a pas de NaN ou de valeurs incohérentes
 print(ventes_journalières.head())
