@@ -14,10 +14,11 @@ categories = st.multiselect("Sélectionnez les catégories de produit", data['Ca
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
 # Filtrage des données
+# Filter by date, store, and category
 filtered_data = data[
-    (data['Magasin'].isin(magasins)) &
-    (data['Categorie_Produit'].isin(categories)) &
-  filtered_data = data[(data['Date_Transaction'].between(start_date, end_date)) & (data['Magasin'].isin(magasins))]
+    (data['Date_Transaction'].between(start_date, end_date)) & 
+    (data['Magasin'].isin(magasins)) & 
+    (data['Categorie_Produit'].isin(categories))
 ]
 
 
