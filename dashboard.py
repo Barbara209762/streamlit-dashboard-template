@@ -15,6 +15,8 @@ date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Da
 
 st.header("Graphique des ventes quotidiennes")
 
+filtered_data = data
+print(filtered_data.columns)
 daily_sales = filtered_data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 fig_daily_sales = px.line(daily_sales, x='Date_Transaction', y='Montant', title="Ventes quotidiennes")
 st.plotly_chart(fig_daily_sales)
