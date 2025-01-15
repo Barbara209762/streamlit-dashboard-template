@@ -63,7 +63,12 @@ chart = alt.Chart(ventes_quotidiennes).mark_line().encode(
 # Affichez le graphique dans Streamlit
 st.altair_chart(chart, use_container_width=True)
 #---------------------------------------------------------------------------------------
-
+ventes_transactions_par_magasin = data.groupby('Magasin').agg(
+    Total_Ventes=('Montant', 'sum'),
+    Nombre_Transactions=('Date_Transaction', 'nunique')  # Assurez-vous d'avoir une colonne 'ID_Transaction' unique pour chaque transaction
+).reset_index()
+st.dataframe(ventes_transactions_par_magasin)
+#------------------------------------------------------------------------------------
 
 # Analyse par magasin
 st.header('Analyse par magasin')
