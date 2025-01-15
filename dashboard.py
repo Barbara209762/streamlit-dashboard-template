@@ -110,6 +110,7 @@ chart2 = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
     title=('Nombre de transactions par magasin')
 )
 
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 # Afficher le deuxième graphique dans Streamlit
 st.altair_chart(chart2, use_container_width=True)
 
