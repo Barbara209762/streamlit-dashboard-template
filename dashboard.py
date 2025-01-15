@@ -4,6 +4,16 @@ import altair as alt
 
 # Charger les données depuis un fichier CSV
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
+# Sidebar pour filtres
+with st.container(): 
+    st.header("1.Vue d'ensemble ")
+    st.header("Filtres dynamiques")
+magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique(), default=data['Magasin'].unique())
+categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
+date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
+
+
+
 
 
 # Calcul des KPI globaux
