@@ -119,11 +119,18 @@ mode_paiement_le_plus_utilise = data['Mode_Paiement'].mode()[0]
 st.metric("Mode de paiement le plus utilisé", mode_paiement_le_plus_utilise)
 
 # Analyse de la satisfaction client
-st.header('Analyse de la satisfaction client')
-
+st.header('Analyse de la satisfaction client') 
 # Moyenne de satisfaction par magasin et par catégorie (barres)
-st.subheader('Satisfaction client par magasin')
-satisfaction_par_mag
+st.subheader('Satisfaction client par magasin') satisfaction_par_magasin = data.groupby('Magasin')['Satisfaction_Client'].mean().reset_index() chart_satisfaction_par_magasin = alt.Chart(satisfaction_par_magasin).mark_bar().encode(
+    x='Magasin:N', 
+    y='Satisfaction_Client:Q', 
+    tooltip=['Magasin', 'Satisfaction_Client'] ).properties( title='Satisfaction client par magasin' ) 
+st.altair_chart(chart_satisfaction_par_magasin, use_container_width=True)
+st.subheader('Satisfaction client par catégorie') 
+satisfaction_par_categorie = data.groupby('Categorie_Produit')['Satisfaction_Client'].mean().reset_index()
+chart_satisfaction_par_categorie = alt.Chart(satisfaction_par_categorie).mark_bar().encode( x='Categorie_Produit:N', y='Satisfaction_Client:Q', 
+tooltip=['Categorie_Produit', 'Satisfaction_Client'] ).properties( title='Satisfaction client par catégorie' ) 
+st.altair_chart(chart_satisfaction_par_categorie,
 
 
 
