@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 import streamlit as st
