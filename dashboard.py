@@ -110,8 +110,7 @@ chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
 )
 st.altair_chart(chart, use_container_width=True)
 
-data = pd.read_csv('votre_fichier.csv')
-
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 # Calculer les ventes totales par magasin
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 
