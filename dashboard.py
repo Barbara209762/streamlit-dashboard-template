@@ -71,7 +71,8 @@ montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_inde
 chart = alt.Chart(montant_moyen_par_magasin).mark_bar().encode(
     x='Magasin:N',
     y='Montant:Q',
-    tooltip=['Magasin', 'Montant'] # Ajoute des infobulles
+    tooltip=['Magasin', 'Montant'] 
+    # Ajoute des infobulles
 ).properties(
     title=('Montant moyen par transaction pour chaque magasin'),
     width=600  # Largeur du graphique
@@ -84,35 +85,14 @@ chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
     theta='Montant:Q',
     color='Magasin:N'
 ).properties(
-    title='Répartition des ventes par magasin'
+    title=('Répartition des ventes par magasin')
 )
 st.altair_chart(chart, use_container_width=True)
 
 
-# Créer le graphique Altair
-chart = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
-    x='Magasin:N',
-    y='Total_Ventes:Q',
-    color='Magasin:N'
-).properties(
-    title=('Ventes totales et nombres de transactions  par magasin')
-)
 
-# Afficher le graphique dans Streamlit
-st.altair_chart(chart, use_container_width=True)
 
-# Créer un deuxième graphique pour le nombre de transactions
-chart2 = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
-    x='Magasin:N',
-    y='Nombre_Transactions:Q',
-    color='Magasin:N'
-).properties(
-    title=('Nombre de transactions par magasin')
-)
 
-data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
-# Afficher le deuxième graphique dans Streamlit
-st.altair_chart(chart2, use_container_width=True)
 
 
 
