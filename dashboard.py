@@ -75,7 +75,7 @@ st.header('Analyse par magasin')
 st.title ("Répartition des ventes par magasin (secteurs)")
 import streamlit as st
 import altair as alt
-import pandas as pd
+
 
 
 data = pd.read_csv('/content/data_dashboard_large - data_dashboard_large.csv')
