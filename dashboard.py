@@ -1,5 +1,4 @@
 import pandas as pd
-import plotly.express as px
 
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 import streamlit as st
@@ -38,15 +37,32 @@ st.metric("Satisfaction client moyenne (score de 1 à 5)", f"{satisfaction_moyen
 
 # Graphique des ventes quotidiennes
 
-st.subheader('Ventes quotidiennes')
+# st.subheader('Ventes quotidiennes')
 # ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
-data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
+# data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
 # ventes_journalieres = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 # fig_ventes_journalieres = px.line(ventes_journalieres, x='Date_Transaction', y='Montant', title='Ventes quotidiennes') 
 # st.plotly_chart(fig_ventes_journalieres)
-fig_ventes_journalieres = px.line(ventes_journalieres, x='Date_Transaction', y='Montant', title='Ventes quotidiennes')
-fig_ventes_journalieres.update_xaxes(type='date')  # Ajoutez cette ligne
-st.plotly_chart(fig_ventes_journalieres)
+#------------------------------------------------------------------------------------------------------
+import streamlit as st
+import altair as alt
+import pandas as pd
+
+# Assurez-vous que 'data' est votre DataFrame et que 'Date_Transaction' et 'Montant' sont vos colonnes
+# Commencez par regrouper les données par 'Date_Transaction' et additionnez le 'Montant' pour chaque jour
+ventes_quotidiennes = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+
+# Créez le graphique avec Altair
+chart = alt.Chart(ventes_quotidiennes).mark_line().encode(
+    x='Date_Transaction:T',  # 'T' indique un type temporel
+    y='Montant:Q'  # 'Q' indique un type quantitatif
+).properties(
+    title='Ventes quotidiennes'
+)
+
+# Affichez le graphique dans Streamlit
+st.altair_chart(chart, use_container_width=True)
+#---------------------------------------------------------------------------------------
 # Vérification des types de données
 print(ventes_journalières.dtypes)
 
