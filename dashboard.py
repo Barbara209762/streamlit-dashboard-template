@@ -93,6 +93,47 @@ st.altair_chart(chart, use_container_width=True)
 
 
 
+import streamlit as st
+import pandas as pd
+import altair as alt
+
+# Supposons que 'data' est votre DataFrame avec les colonnes 'Magasin', 'Montant', etc.
+# Assurez-vous d'avoir importé pandas et lu vos données comme vous l'avez fait précédemment
+
+# Calculer les ventes totales et le nombre de transactions par magasin
+ventes_transactions_par_magasin = data.groupby('Magasin').agg(
+    Total_Ventes=('Montant', 'sum'),
+    Nombre_Transactions=('ID_Transaction', 'nunique') 
+).reset_index()
+
+# Créer le graphique Altair
+chart = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
+    x='Magasin:N',
+    y='Total_Ventes:Q',
+    color='Magasin:N'
+).properties(
+    title='Ventes totales par magasin'
+)
+
+# Afficher le graphique dans Streamlit
+st.altair_chart(chart, use_container_width=True)
+
+# Créer un deuxième graphique pour le nombre de transactions
+chart2 = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
+    x='Magasin:N',
+    y='Nombre_Transactions:Q',
+    color='Magasin:N'
+).properties(
+    title='Nombre de transactions par magasin'
+)
+
+# Afficher le deuxième graphique dans Streamlit
+st.altair_chart(chart2, use_container_width=True)
+
+
+
+
+
 
 
 
