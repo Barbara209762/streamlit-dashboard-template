@@ -13,8 +13,8 @@ magasins = st.multiselect("Sélectionnez les magasins", data['Magasin'].unique()
 categories = st.multiselect("Sélectionnez les catégories de produit", data['Categorie_Produit'].unique(), default=data['Categorie_Produit'].unique())
 date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Date_Transaction'].max()])
 
-import streamlit as st
-import pandas as pd
+
+
 import altair as alt
 
 # Charger les données
@@ -36,9 +36,7 @@ st.metric("Satisfaction client moyenne (score de 1 à 5)", f"{satisfaction_moyen
 
 
 #------------------------------------------------------------------------------------------------------
-import streamlit as st
-import altair as alt
-import pandas as pd
+
 
 ventes_quotidiennes = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 
@@ -63,13 +61,6 @@ st.dataframe(ventes_transactions_par_magasin)
 # Analyse par magasin
 st.header('2.Analyse par magasin')
 st.title ("A/ graphiques")
-import streamlit as st
-import altair as alt
-
-
-import streamlit as st
-import altair as alt
-import pandas as pd
 
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 
@@ -116,7 +107,7 @@ chart2 = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
     y='Nombre_Transactions:Q',
     color='Magasin:N'
 ).properties(
-    title='Nombre de transactions par magasin'
+    title=('Nombre de transactions par magasin')
 )
 
 # Afficher le deuxième graphique dans Streamlit
