@@ -93,9 +93,11 @@ st.altair_chart(chart, use_container_width=True)
 
 
 
-import streamlit as st
 import pandas as pd
-import altair as alt
+import streamlit as st
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
+  # Chemin relatif
+st.write(data)
 
 # Supposons que 'data' est votre DataFrame avec les colonnes 'Magasin', 'Montant', etc.
 # Assurez-vous d'avoir importé pandas et lu vos données comme vous l'avez fait précédemment
