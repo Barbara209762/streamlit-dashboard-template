@@ -121,19 +121,41 @@ st.metric("Mode de paiement le plus utilisé", mode_paiement_le_plus_utilise)
 # Analyse de la satisfaction client
 st.header('Analyse de la satisfaction client') 
 # Moyenne de satisfaction par magasin et par catégorie (barres)
-st.subheader('Satisfaction client par magasin') satisfaction_par_magasin = data.groupby('Magasin')['Satisfaction_Client'].mean().reset_index() chart_satisfaction_par_magasin = alt.Chart(satisfaction_par_magasin).mark_bar().encode(
-    x='Magasin:N', 
-    y='Satisfaction_Client:Q', 
-    tooltip=['Magasin', 'Satisfaction_Client'] ).properties( title='Satisfaction client par magasin' ) 
-st.altair_chart(chart_satisfaction_par_magasin, use_container_width=True)
-st.subheader('Satisfaction client par catégorie') 
+
+
+
+import streamlit as st
+import pandas as pd
+import altair as alt
+
+# Supposons que 'data' est votre DataFrame avec les colonnes 'Magasin', 'Categorie_Produit', 'Satisfaction_Client', etc.
+
+# Graphique de la satisfaction par magasin
+satisfaction_par_magasin = data.groupby('Magasin')['Satisfaction_Client'].mean().reset_index()
+
+chart_magasin = alt.Chart(satisfaction_par_magasin).mark_bar().encode(
+    x='Magasin:N',
+    y='Satisfaction_Client:Q',
+    color='Magasin:N'
+).properties(
+    title='Moyenne de satisfaction par magasin'
+)
+
+st.altair_chart(chart_magasin, use_container_width=True)
+
+
+# Graphique de la satisfaction par catégorie
 satisfaction_par_categorie = data.groupby('Categorie_Produit')['Satisfaction_Client'].mean().reset_index()
-chart_satisfaction_par_categorie = alt.Chart(satisfaction_par_categorie).mark_bar().encode( x='Categorie_Produit:N', y='Satisfaction_Client:Q', 
-tooltip=['Categorie_Produit', 'Satisfaction_Client'] ).properties( title='Satisfaction client par catégorie' ) 
-st.altair_chart(chart_satisfaction_par_categorie,
 
+chart_categorie = alt.Chart(satisfaction_par_categorie).mark_bar().encode(
+    x='Categorie_Produit:N',
+    y='Satisfaction_Client:Q',
+    color='Categorie_Produit:N'
+).properties(
+    title='Moyenne de satisfaction par catégorie'
+)
 
-
+st.altair_chart(chart_categorie, use_container_width=True)
 
 
 
