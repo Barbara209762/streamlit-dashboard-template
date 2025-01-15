@@ -73,10 +73,30 @@ st.dataframe(ventes_transactions_par_magasin)
 # Analyse par magasin
 st.header('Analyse par magasin')
 st.title ("Répartition des ventes par magasin (secteurs)")
-st.subheader('Répartition des ventes par magasin')
+import streamlit as st
+import altair as alt
+import pandas as pd
+
+# Charger les données (remplacez 'votre_fichier.csv' par le chemin de votre fichier)
+data = pd.read_csv('votre_fichier.csv')
+
+# Calculer les ventes totales par magasin
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
-fig_ventes_par_magasin = px.pie(ventes_par_magasin, values='Montant', names='Magasin', title='Répartition des ventes par magasin')
-st.plotly_chart(fig_ventes_par_magasin)
+
+# Créer le graphique avec Altair
+chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
+    theta='Montant:Q',
+    color='Magasin:N'
+).properties(
+    title='Répartition des ventes par magasin'
+)
+
+# Afficher le graphique dans Streamlit
+st.altair_chart(chart, use_container_width=True)
+#st.subheader('Répartition des ventes par magasin')
+#ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
+#fig_ventes_par_magasin = px.pie(ventes_par_magasin, values='Montant', names='Magasin', title='Répartition des ventes par magasin')
+#st.plotly_chart(fig_ventes_par_magasin)
 
 # Montant moyen par transaction pour chaque magasin (barres)
 st.subheader('Montant moyen par transaction par magasin')
