@@ -36,11 +36,15 @@ st.metric("Montant moyen par transaction (€)", f"{montant_moyen_transaction:,.
 st.metric("Satisfaction client moyenne (score de 1 à 5)", f"{satisfaction_moyenne:.2f}")
 
 # Graphique des ventes quotidiennes
+
 st.subheader('Ventes quotidiennes')
-ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+# ventes_journalières = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
 data['Date_Transaction'] = pd.to_datetime(data['Date_Transaction'])
-ventes_journalieres = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
-fig_ventes_journalieres = px.line(ventes_journalieres, x='Date_Transaction', y='Montant', title='Ventes quotidiennes') 
+# ventes_journalieres = data.groupby('Date_Transaction')['Montant'].sum().reset_index()
+# fig_ventes_journalieres = px.line(ventes_journalieres, x='Date_Transaction', y='Montant', title='Ventes quotidiennes') 
+# st.plotly_chart(fig_ventes_journalieres)
+fig_ventes_journalieres = px.line(ventes_journalieres, x='Date_Transaction', y='Montant', title='Ventes quotidiennes')
+fig_ventes_journalieres.update_xaxes(type='date')  # Ajoutez cette ligne
 st.plotly_chart(fig_ventes_journalieres)
 # Vérification des types de données
 print(ventes_journalières.dtypes)
