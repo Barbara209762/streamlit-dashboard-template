@@ -77,8 +77,7 @@ import streamlit as st
 import altair as alt
 
 
-
-data = pd.read_csv('/content/data_dashboard_large - data_dashboard_large.csv')
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
     theta='Montant:Q',
