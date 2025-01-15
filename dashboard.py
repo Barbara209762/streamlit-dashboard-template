@@ -80,10 +80,49 @@ chart_quantites_par_categorie = alt.Chart(quantites_par_categorie).mark_bar().en
 )
 st.altair_chart(chart_quantites_par_categorie, use_container_width=True)
 
-# Graphique empilé des montants des ventes par
+# Graphique empilé des montants des ventes par catégorie et magasin
+st.subheader('Montants des ventes par catégorie et magasin')
+ventes_par_categorie_et_magasin = data.groupby(['Categorie_Produit', 'Magasin'])['Montant'].sum().reset_index()
+chart_ventes_par_categorie_et_magasin = alt.Chart(ventes_par_categorie_et_magasin).mark_bar().encode(
+    x='Categorie_Produit:N',
+    y='Montant:Q',
+    color='Magasin:N',
+    tooltip=['Categorie_Produit', 'Magasin', 'Montant']
+).properties(
+    title='Montants des ventes par catégorie et magasin'
+)
+st.altair_chart(chart_ventes_par_categorie_et_magasin, use_container_width=True)
 
+# Tableau des Top 5 produits les plus vendus par catégorie
+st.subheader('Top 5 des produits les plus vendus par catégorie')
+top_5_produits_par_categorie = data.groupby('Categorie_Produit')['Quantite'].sum().reset_index().sort_values(by='Quantite', ascending=False).head(5)
+st.dataframe(top_5_produits_par_categorie)
 
+# Analyse des modes de paiement
+st.header('Analyse des modes de paiement')
 
+# Répartition des transactions par mode de paiement (secteurs)
+st.subheader('Répartition des transactions par mode de paiement')
+transactions_par_mode_paiement = data.groupby('Mode_Paiement')['Montant'].sum().reset_index()
+chart_transactions_par_mode_paiement = alt.Chart(transactions_par_mode_paiement).mark_arc().encode(
+    theta='Montant:Q',
+    color='Mode_Paiement:N',
+    tooltip=['Mode_Paiement', 'Montant']
+).properties(
+    title='Répartition des transactions par mode de paiement'
+)
+st.altair_chart(chart_transactions_par_mode_paiement, use_container_width=True)
+
+# Mode de paiement le plus utilisé
+mode_paiement_le_plus_utilise = data['Mode_Paiement'].mode()[0]
+st.metric("Mode de paiement le plus utilisé", mode_paiement_le_plus_utilise)
+
+# Analyse de la satisfaction client
+st.header('Analyse de la satisfaction client')
+
+# Moyenne de satisfaction par magasin et par catégorie (barres)
+st.subheader('Satisfaction client par magasin')
+satisfaction_par_mag
 
 
 
