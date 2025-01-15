@@ -44,8 +44,8 @@ ventes_quotidiennes = data.groupby('Date_Transaction')['Montant'].sum().reset_in
 
 # Créez le graphique avec Altair
 chart = alt.Chart(ventes_quotidiennes).mark_line().encode(
-    x='Date_Transaction:T',  # 'T' indique un type temporel
-    y='Montant:Q'  # 'Q' indique un type quantitatif
+    x='Date_Transaction:T',  
+    y='Montant:Q'  
 ).properties(
     title='Ventes quotidiennes'
 )
@@ -71,8 +71,6 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 
-# Charger les données (remplacez 'votre_fichier.csv' par le chemin de votre fichier)
-
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 
 # Calculer le montant moyen par transaction pour chaque magasin
@@ -84,7 +82,7 @@ chart = alt.Chart(montant_moyen_par_magasin).mark_bar().encode(
     y='Montant:Q',
     tooltip=['Magasin', 'Montant'] # Ajoute des infobulles
 ).properties(
-    title='Montant moyen par transaction pour chaque magasin',
+    title=('Montant moyen par transaction pour chaque magasin'),
     width=600  # Largeur du graphique
 )
 
@@ -99,20 +97,6 @@ chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
 )
 st.altair_chart(chart, use_container_width=True)
 
-st.title("A/ TABLEAU")
-
-import streamlit as st
-import pandas as pd
-import altair as alt
-
-# Supposons que 'data' est votre DataFrame avec les colonnes 'Magasin', 'Montant', etc.
-# Assurez-vous d'avoir importé pandas et lu vos données comme vous l'avez fait précédemment
-
-# Calculer les ventes totales et le nombre de transactions par magasin
-ventes_transactions_par_magasin = data.groupby('Magasin').agg(
-    Total_Ventes=('Montant', 'sum'),
-    Nombre_Transactions=('ID_Transaction', 'nunique') 
-).reset_index()
 
 # Créer le graphique Altair
 chart = alt.Chart(ventes_transactions_par_magasin).mark_bar().encode(
