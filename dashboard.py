@@ -151,26 +151,27 @@ chart_categorie = alt.Chart(satisfaction_par_categorie).mark_bar().encode(
 
 st.altair_chart(chart_categorie, use_container_width=True)
 
+# Charger les données depuis un fichier CSV
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
+# Calculer le top 5 des produits les plus vendus par catégorie
+top_5_produits_par_categorie = data.groupby('Categorie_Produit')['Quantite'].sum().reset_index().sort_values(by='Quantite', ascending=False).head(5)
 
-
-
-# Supposons que 'data' est votre DataFrame avec les colonnes 'Categorie_Produit', 'Nom_Produit', 'Quantite', etc.
-
-# Calculer le top 5 des produits par catégorie
-top_5_produits_par_categorie = data.groupby(['Categorie_Produit', 'Nom_Produit'])['Quantite'].sum().reset_index()
-top_5_produits_par_categorie = top_5_produits_par_categorie.groupby('Categorie_Produit').apply(lambda x: x.nlargest(5, 'Quantite')).reset_index(drop=True)
-
-
-# Créer le graphique Altair (heatmap pour une visualisation tableau)
-chart = alt.Chart(top_5_produits_par_categorie).mark_rect().encode(
+# Créer un graphique Altair pour visualiser les données
+chart_top_5_produits_par_categorie = alt.Chart(top_5_produits_par_categorie).mark_bar().encode(
     x='Categorie_Produit:N',
-    y='Nom_Produit:N',
-    color='Quantite:Q'
+    y='Quantite:Q',
+    tooltip=['Categorie_Produit', 'Quantite']
 ).properties(
     title='Top 5 des produits les plus vendus par catégorie'
 )
 
-st.altair_chart(chart, use_container_width=True)
+# Afficher le graphique dans Streamlit
+st.altair_chart(chart_top_5_produits_par_categorie, use_container_width=True)
+
+# Afficher les données sous forme de tableau
+st.subheader('Top 5 des produits les plus vendus par catégorie')
+st.dataframe(top_5_produits_par_categorie)
+
 
 
 
