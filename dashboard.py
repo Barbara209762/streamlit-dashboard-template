@@ -109,6 +109,7 @@ chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
     title='Répartition des ventes par magasin'
 )
 st.altair_chart(chart, use_container_width=True)
+st.title("A/ TABLEAU")
 
 
 
