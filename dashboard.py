@@ -122,12 +122,6 @@ st.metric("Mode de paiement le plus utilisé", mode_paiement_le_plus_utilise)
 st.header('Analyse de la satisfaction client') 
 # Moyenne de satisfaction par magasin et par catégorie (barres)
 
-
-
-import streamlit as st
-import pandas as pd
-import altair as alt
-
 # Supposons que 'data' est votre DataFrame avec les colonnes 'Magasin', 'Categorie_Produit', 'Satisfaction_Client', etc.
 
 # Graphique de la satisfaction par magasin
@@ -156,6 +150,27 @@ chart_categorie = alt.Chart(satisfaction_par_categorie).mark_bar().encode(
 )
 
 st.altair_chart(chart_categorie, use_container_width=True)
+
+
+
+
+# Supposons que 'data' est votre DataFrame avec les colonnes 'Categorie_Produit', 'Nom_Produit', 'Quantite', etc.
+
+# Calculer le top 5 des produits par catégorie
+top_5_produits_par_categorie = data.groupby(['Categorie_Produit', 'Nom_Produit'])['Quantite'].sum().reset_index()
+top_5_produits_par_categorie = top_5_produits_par_categorie.groupby('Categorie_Produit').apply(lambda x: x.nlargest(5, 'Quantite')).reset_index(drop=True)
+
+
+# Créer le graphique Altair (heatmap pour une visualisation tableau)
+chart = alt.Chart(top_5_produits_par_categorie).mark_rect().encode(
+    x='Categorie_Produit:N',
+    y='Nom_Produit:N',
+    color='Quantite:Q'
+).properties(
+    title='Top 5 des produits les plus vendus par catégorie'
+)
+
+st.altair_chart(chart, use_container_width=True)
 
 
 
