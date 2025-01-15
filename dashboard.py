@@ -77,7 +77,28 @@ import streamlit as st
 import altair as alt
 
 
-data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
+import streamlit as st
+import altair as alt
+import pandas as pd
+
+# Charger les données (remplacez 'votre_fichier.csv' par le chemin de votre fichier)
+data = pd.read_csv('votre_fichier.csv')
+
+# Calculer le montant moyen par transaction pour chaque magasin
+montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
+
+# Créer le graphique avec Altair
+chart = alt.Chart(montant_moyen_par_magasin).mark_bar().encode(
+    x='Magasin:N',
+    y='Montant:Q',
+    tooltip=['Magasin', 'Montant'] # Ajoute des infobulles
+).properties(
+    title='Montant moyen par transaction pour chaque magasin',
+    width=600  # Largeur du graphique
+)
+
+# Afficher le graphique dans Streamlit
+st.altair_chart(chart, use_container_width=True)
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
     theta='Montant:Q',
@@ -107,8 +128,31 @@ st.subheader('Montant moyen par transaction par magasin')
 montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
 fig_montant_moyen_par_magasin = px.bar(montant_moyen_par_magasin, x='Magasin', y='Montant', title='Montant moyen par transaction par magasin') 
 st.plotly_chart(fig_montant_moyen_par_magasin)
+# ...............................................................................................
+import streamlit as st
+import altair as alt
+import pandas as pd
 
+# Charger les données (remplacez 'votre_fichier.csv' par le chemin de votre fichier)
 
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
+
+# Calculer le montant moyen par transaction pour chaque magasin
+montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
+
+# Créer le graphique avec Altair
+chart = alt.Chart(montant_moyen_par_magasin).mark_bar().encode(
+    x='Magasin:N',
+    y='Montant:Q',
+    tooltip=['Magasin', 'Montant'] # Ajoute des infobulles
+).properties(
+    title='Montant moyen par transaction pour chaque magasin',
+    width=600  # Largeur du graphique
+)
+
+# Afficher le graphique dans Streamlit
+st.altair_chart(chart, use_container_width=True)
+# ...............................................................................................
 # Tableau des ventes totales et nombre de transactions par magasin
 st.subheader('Ventes totales et nombre de transactions par magasin')
 ventes_et_transactions_par_magasin = data.groupby('Magasin').agg({'Montant':'sum', 'Date_Transaction':'nunique'}).reset_index()
