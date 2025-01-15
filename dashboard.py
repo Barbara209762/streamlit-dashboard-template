@@ -154,8 +154,10 @@ chart = alt.Chart(montant_moyen_par_magasin).mark_bar().encode(
 
 # Afficher le graphique dans Streamlit
 st.altair_chart(chart, use_container_width=True)
-st.title("B/ TABLEAU 3)
+
 # ...............................................................................................
+st.title("A/ TABLEAU")
+
 # Tableau des ventes totales et nombre de transactions par magasin
 st.subheader('Ventes totales et nombre de transactions par magasin')
 ventes_et_transactions_par_magasin = data.groupby('Magasin').agg({'Montant':'sum', 'Date_Transaction':'nunique'}).reset_index()
