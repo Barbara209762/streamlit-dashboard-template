@@ -77,19 +77,24 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 
-# Charger les données (remplacez 'votre_fichier.csv' par le chemin de votre fichier)
-data = pd.read_csv('votre_fichier.csv')
 
-# Calculer les ventes totales par magasin
+data = pd.read_csv('/content/data_dashboard_large - data_dashboard_large.csv')
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
-
-# Créer le graphique avec Altair
 chart = alt.Chart(ventes_par_magasin).mark_arc().encode(
     theta='Montant:Q',
     color='Magasin:N'
 ).properties(
     title='Répartition des ventes par magasin'
 )
+st.altair_chart(chart, use_container_width=True)
+
+data = pd.read_csv('votre_fichier.csv')
+
+# Calculer les ventes totales par magasin
+ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
+
+# Créer le graphique avec Altair
+
 
 # Afficher le graphique dans Streamlit
 st.altair_chart(chart, use_container_width=True)
