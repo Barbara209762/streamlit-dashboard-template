@@ -40,7 +40,7 @@ st.altair_chart(chart_ventes_journalieres, use_container_width=True)
 
 # Analyse par magasin
 st.header('2.Analyse par magasin')
-st.subheader('A/ graphiques )
+st.subheader('graphiques')
 
 # Répartition des ventes par magasin (secteurs)
 st.subheader('a/ Répartition des ventes par magasin')
