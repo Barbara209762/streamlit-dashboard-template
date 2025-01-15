@@ -82,7 +82,8 @@ import altair as alt
 import pandas as pd
 
 # Charger les données (remplacez 'votre_fichier.csv' par le chemin de votre fichier)
-data = pd.read_csv('votre_fichier.csv')
+
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
 
 # Calculer le montant moyen par transaction pour chaque magasin
 montant_moyen_par_magasin = data.groupby('Magasin')['Montant'].mean().reset_index()
