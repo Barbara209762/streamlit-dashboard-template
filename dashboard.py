@@ -72,7 +72,7 @@ st.dataframe(ventes_transactions_par_magasin)
 
 # Analyse par magasin
 st.header('Analyse par magasin')
-# Répartition des ventes par magasin (secteurs)
+st.title ("Répartition des ventes par magasin (secteurs)")
 st.subheader('Répartition des ventes par magasin')
 ventes_par_magasin = data.groupby('Magasin')['Montant'].sum().reset_index()
 fig_ventes_par_magasin = px.pie(ventes_par_magasin, values='Montant', names='Magasin', title='Répartition des ventes par magasin')
