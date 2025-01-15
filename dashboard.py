@@ -19,7 +19,7 @@ montant_moyen_transaction = data['Montant'].mean()
 satisfaction_moyenne = data['Satisfaction_Client'].mean()
 
 # Vue d'ensemble (Section Résumé)
-st.title('section résumé )
+
 
 st.metric("Total des ventes (€)", f"{total_ventes:,.2f}")
 st.metric("Nombre total de transactions", total_transactions)
