@@ -3,7 +3,8 @@ import pandas as pd
 import altair as alt
 
 # Charger les données depuis un fichier CSV
-data = pd.read_csv('data_dashboard_large.csv')
+data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
+
 
 # Calcul des KPI globaux
 total_ventes = data['Montant'].sum()
