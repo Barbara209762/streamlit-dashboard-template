@@ -16,7 +16,7 @@ date_range = st.date_input("Période", [data['Date_Transaction'].min(), data['Da
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import altair as alt
 
 # Charger les données
 data = pd.read_csv("data_dashboard_large - data_dashboard_large.csv")
