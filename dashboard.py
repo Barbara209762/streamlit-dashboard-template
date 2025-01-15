@@ -20,7 +20,7 @@ satisfaction_moyenne = data['Satisfaction_Client'].mean()
 
 # Vue d'ensemble (Section Résumé)
 
-st.header('1.Vue d'ensemble: Section Résumé')
+st.header('1. section résumé )
 
 st.metric("Total des ventes (€)", f"{total_ventes:,.2f}")
 st.metric("Nombre total de transactions", total_transactions)
