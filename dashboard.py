@@ -73,7 +73,7 @@ st.dataframe(ventes_transactions_par_magasin)
 
 # Analyse par magasin
 st.header('2.Analyse par magasin')
-st.title ("graphique")
+st.title ("A/ graphiques")
 import streamlit as st
 import altair as alt
 
